@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        
+        var AdelaideCoord = {lat: -34.9326, lng: 138.6001};
+        var SydneyCoord = {lat: -33.8274, lng: 151.0569};
+        var BrisbaneCoord = {lat: -27.4379, lng: 153.0625};
+        var PerthCoord = {lat: -31.9326, lng: 115.8633};
+        var MelbourneCoord = {lat: -37.9154, lng: 145.0692};
+
+        var mainCity = [AdelaideCoord,SydneyCoord,BrisbaneCoord,PerthCoord,MelbourneCoord];
+        
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        
+        
+              
+              var marker_ade = new google.maps.Marker({
+              position: mainCity[0],
+              map:map
+              });  
+              
+              marker_ade.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/ade");
+              });   
+              
+              var marker_syd = new google.maps.Marker({
+              position: mainCity[1],
+              map:map
+              });  
+              
+              marker_syd.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/syd");
+              });   
+              
+              var marker_bri = new google.maps.Marker({
+              position: mainCity[2],
+              map:map
+              });  
+              
+              marker_bri.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/bri");
+              }); 
+              
+              var marker_per = new google.maps.Marker({
+              position: mainCity[3],
+              map:map
+              });  
+              
+              marker_per.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/per");
+              });   
+              
+              var marker_mel = new google.maps.Marker({
+              position: mainCity[4],
+              map:map
+              });  
+              
+              marker_mel.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/mel");
+              });   
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGZ10PwxxqzWXjUVgZrbUMA_f1PmNWFiw&callback=initMap">
+    </script>
+  </body>
+</html>

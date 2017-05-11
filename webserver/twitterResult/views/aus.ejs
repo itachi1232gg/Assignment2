@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Immigration Analysis</title>
+    
+    <style>
+      #map {
+        height: 400px;
+        width: 100%;
+       }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart','bar']});
+      google.charts.setOnLoadCallback(drawVisualization);
+      google.charts.setOnLoadCallback(drawChart);
+        
+      <%  var numAdeNeg=0, numAdePos=0, numAdeNeu=0, numAusNeu=0, numAusNeg=0, numAusPos=0, numBriNeu=0, numBriNeg=0, numBriPos=0, numMelNeu=0, numMelNeg=0, numMelPos=0, numPerNeu=0, numPerNeg=0, numPerPos=0, numSydNeu=0, numSydNeg=0, numSydPos=0; %>
+         <%  data.rows.forEach(function(row){ %>
+          <%  if(row.key[0]=="Adelaide"){ %>
+                    <%  if(row.key[2]==0){ %>
+                     <%  numAdeNeg=row.value; %>
+                 <%  } else if(row.key[2] == 2){ %>
+                     <%  numAdeNeu=row.value; %>
+                 <%  } else if(row.key[2] == 4){ %>
+                      <% numAdePos=row.value; %>
+                  <% } %>
+                 <% } %>
+                  
+              <%  if(row.key[0]=="Australia"){ %>
+                 <%  if(row.key[2]==0){ %>
+                     <%  numAusNeg=row.value; %>
+                 <%  } else if(row.key[2] == 2){ %>
+                    <%   numAusNeu=row.value; %>
+                  <% } else if(row.key[2] == 4){ %>
+                     <%  numAusPos=row.value; %>
+                  <% } %>
+                  <% } %>
+                  
+               <%  if(row.key[0]=="Brisbane"){ %>
+                 <%  if(row.key[2]==0){ %>
+                      <% numBriNeg=row.value; %>
+                 <%  } else if(row.key[2] == 2){ %>
+                      <% numBriNeu=row.value; %>
+                  <% } else if(row.key[2] == 4){ %>
+                     <%  numBriPos=row.value; %>
+                 <%  } %>
+                  <% } %>
+                <%  if(row.key[0]=="Melbourne"){ %>
+                 <%  if(row.key[2]==0){ %>
+                     <%  numMelNeg=row.value; %>
+                 <%  } else if(row.key[2] == 2){ %>
+                     <%  numMelNeu=row.value; %>
+                  <% } else if(row.key[2] == 4){ %>
+                     <%  numMelPos=row.value; %>
+                  <% } %>
+                  <% } %>
+                  
+                 <% if(row.key[0]=="Perth"){ %>
+                  <% if(row.key[2]==0){ %>
+                     <%  numPerNeg=row.value; %>
+                 <%  } else if(row.key[2] == 2){ %>
+                     <%  numPerNeu=row.value; %>
+                 <%  } else if(row.key[2] == 4){ %>
+                     <%  numPerPos=row.value; %>
+                 <%  } %>
+                  <% } %>  
+                <%  if(row.key[0]=="Sydney"){ %>
+                  <%  if(row.key[2]==0){ %>
+                      <%  numSydNeg=row.value; %>
+                  <%  } else if(row.key[2] == 2){ %>
+                     <%   numSydNeu=row.value; %>
+                  <%  } else if(row.key[2] == 4){ %>
+                      <%  numSydPos=row.value; %>
+                   <% } %>
+                  <%  } %>
+        <%  }); %>
+        
+        <%  var numAdeHealth=0, numAdeImmi=0, numAusHealth=0, numAusImmi=0, numBriHealth=0, numBriImmi=0, numMelHealth=0, numMelImmi=0, numPerHealth=0, numPerImmi=0, numSydHealth=0, numSydImmi=0; numAde=0, numAus=0; numBri=0; numMel=0; numPer=0; numSyd=0;%>
+         <%  data.rows.forEach(function(row){ %>
+             <% if(row.key[0]=="Adelaide"&&row.key[1]=="health"){ %>
+	                <% numAdeHealth+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Adelaide"&&row.key[1]=="immigration"){ %>
+                	<% numAdeImmi+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Adelaide"&&row.key[1]==""){ %>
+                	<% numAde+=row.value; %>
+                <% }; %>
+                
+                <% if(row.key[0]=="Australia"&&row.key[1]=="health"){ %>
+	                <% numAusHealth+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Australia"&&row.key[1]=="immigration"){ %>
+                	<% numAusImmi+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Australia"&&row.key[1]==""){ %>
+                	<% numAus+=row.value; %>
+                <% }; %>
+                
+                <% if(row.key[0]=="Brisbane"&&row.key[1]=="health"){ %>
+	                <% numBriHealth+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Brisbane"&&row.key[1]=="immigration"){ %>
+                	<% numBriImmi+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Brisbane"&&row.key[1]==""){ %>
+                	<% numBri+=row.value; %>
+                <% }; %>
+                
+                <% if(row.key[0]=="Melbourne"&&row.key[1]=="health"){ %>
+	                <% numMelHealth+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Melbourne"&&row.key[1]=="immigration"){ %>
+                	<% numMelImmi+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Melbourne"&&row.key[1]==""){ %>
+                	<% numMel+=row.value; %>
+                <% }; %>
+                
+                <% if(row.key[0]=="Perth"&&row.key[1]=="health"){ %>
+	                <% numPerHealth+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Perth"&&row.key[1]=="immigration"){ %>
+                	<% numPerImmi+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Perth"&&row.key[1]==""){ %>
+                	<% numPer+=row.value; %>
+                <% }; %>
+                
+                <% if(row.key[0]=="Sydney"&&row.key[1]=="health"){ %>
+	                <% numSydHealth+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Sydney"&&row.key[1]=="immigration"){ %>
+                	<% numSydImmi+=row.value; %>
+                <% }; %>
+                <% if(row.key[0]=="Sydney"&&row.key[1]==""){ %>
+                	<% numSyd+=row.value; %>
+                <% }; %>
+        <%  }); %>
+        
+        <% var numAvg = (numAdePos+numAusPos+numBriPos+numMelPos+numPerPos+numSydPos)/(numSydNeg+numSydNeu+numSydPos+numMelNeg+numMelNeu+numMelPos+numBriNeg+numBriNeu+numBriPos+numAdeNeg+numAdeNeu+numAdePos+numPerNeg+numPerNeu+numPerPos+numAusNeg+numAusNeu+numAusPos);%>
+        
+      function drawVisualization() {
+        // Some raw data (not necessarily accurate)
+        
+        // find the index
+        
+        // var selectedPeriod = [];
+        // selectedPeriod.push(['Day', 'Distance', 'Target']);
+        var chartDataFront = [['City', 'Happiness Degree', 'Average']];
+        //BackendJS
+        chartDataFront.push(['Sydney' , <%=numSydPos/(numSydNeg+numSydNeu+numSydPos)%>,<%=numAvg%> ]); 
+        chartDataFront.push(['Melbourne' , <%=numMelPos/(numMelNeg+numMelNeu+numMelPos)%>,<%=numAvg%>]); 
+        chartDataFront.push(['Brisbane' ,<%=numBriPos/(numBriNeg+numBriNeu+numBriPos)%>,<%=numAvg%>]); 
+        chartDataFront.push(['Adelaide' ,<%=numAdePos/(numAdeNeg+numAdeNeu+numAdePos)%>,<%=numAvg%>]); 
+        chartDataFront.push(['Perth' ,<%=numPerPos/(numPerNeg+numPerNeu+numPerPos)%>,<%=numAvg%>]); 
+        chartDataFront.push(['Others' ,<%=numAusPos/(numAusNeg+numAusNeu+numAusPos)%>,<%=numAvg%>]); 
+        
+        var dataBar = google.visualization.arrayToDataTable(chartDataFront);
+
+    var optionsBar = {
+      title : 'Happiness Index among Main Cities in Australia',
+      vAxis: {title: 'Happiness Index'},
+      hAxis: {title: 'City'},
+      seriesType: 'bars',
+      series: {1: {type: 'line'}}
+    };
+
+    var chartBar = new google.visualization.ComboChart(document.getElementById('chart_div_bar'));
+    chartBar.draw(dataBar, optionsBar);
+      }
+      
+    function drawChart() {
+        
+        var chartDataFront = [['City', 'Health', 'Immigration']];
+        
+        chartDataFront.push(['Sydney' , <%=numSydHealth/(numSyd+numSydHealth+numSydImmi)%>,<%=numSydImmi/(numSyd+numSydHealth+numSydImmi)*7 %> ]); 
+        chartDataFront.push(['Melbourne' , <%=numMelHealth/(numMel+numMelHealth+numMelImmi)%>,<%=numMelImmi/(numMel+numMelHealth+numMelImmi)*7 %>]); 
+        chartDataFront.push(['Brisbane' ,<%=numBriHealth/(numBri+numBriHealth+numBriImmi)%>,<%=numBriImmi/(numBri+numBriHealth+numBriImmi)*7 %>]); 
+        chartDataFront.push(['Adelaide' ,<%=numAdeHealth/(numAde+numAdeHealth+numAdeImmi)%>,<%=numAdeImmi/(numAde+numAdeHealth+numAdeImmi)*7 %>]); 
+        chartDataFront.push(['Perth' ,<%=numPerHealth/(numPer+numPerHealth+numPerImmi)%>,<%=numPerImmi/(numPer+numPerHealth+numPerImmi)*7 %>]); 
+        chartDataFront.push(['Others' ,<%=numAusHealth/(numAus+numAusHealth+numAusImmi)%>,<%=numAusImmi/(numAus+numAusHealth+numAusImmi)*7 %>]); 
+        
+        <% console.log("======Syd====== ") %>
+        <% console.log(numSydHealth) %>
+        <% console.log(numSydImmi) %>
+        <% console.log("======Mel====== ") %>
+        <% console.log(numMelHealth) %>
+        <% console.log(numMelImmi) %>
+        <% console.log("======Per====== ") %>
+        <% console.log(numPerHealth) %>
+        <% console.log(numPerImmi) %>
+        
+        var data = google.visualization.arrayToDataTable(
+          chartDataFront
+        );
+
+        var options = {
+          chart: {
+            title: 'Attention to Specific Topics',
+            subtitle: 'Health and Immigration',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  </head>
+  <body>
+      
+
+          <div class="jumbotron">
+                  <div class="container">
+            <h1>Immigration Destination Analysis</h1> 
+            <p>Based on Twitter Data.</p> 
+              </div>
+          </div>
+  
+      
+    <div class="container">
+        <h3>Five Main Destinations(Cities) in Australia:</h3>
+        <div id="map" style="width: 100%; height: 500px;"></div>
+        <h3>Happiness Index:</h3>
+        <div id="chart_div_bar" style="width:100%; height: 500px;"></div>
+        <h3>Topics about Health and Immigration:</h3>
+        <div id="columnchart_material" style="width: 100%; height: 500px;"></div>
+    </div>
+    
+    
+    <script>
+      function initMap() {
+        
+        var AdelaideCoord = {lat: -34.9326, lng: 138.6001};
+        var SydneyCoord = {lat: -33.8274, lng: 151.0569};
+        var BrisbaneCoord = {lat: -27.4379, lng: 153.0625};
+        var PerthCoord = {lat: -31.9326, lng: 115.8633};
+        var MelbourneCoord = {lat: -37.9154, lng: 145.0692};
+
+        var mainCity = [AdelaideCoord,SydneyCoord,BrisbaneCoord,PerthCoord,MelbourneCoord];
+        
+        var uluru = {lat: -25.363, lng: 131.044};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: uluru
+        });
+        
+        
+              
+              var marker_ade = new google.maps.Marker({
+              position: mainCity[0],
+              map:map
+              });  
+              
+              marker_ade.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/ade");
+              });   
+              
+              var marker_syd = new google.maps.Marker({
+              position: mainCity[1],
+              map:map
+              });  
+              
+              marker_syd.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/syd");
+              });   
+              
+              var marker_bri = new google.maps.Marker({
+              position: mainCity[2],
+              map:map
+              });  
+              
+              marker_bri.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/bri");
+              }); 
+              
+              var marker_per = new google.maps.Marker({
+              position: mainCity[3],
+              map:map
+              });  
+              
+              marker_per.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/per");
+              });   
+              
+              var marker_mel = new google.maps.Marker({
+              position: mainCity[4],
+              map:map
+              });  
+              
+              marker_mel.addListener('click', function() {
+                window.location.replace("https://cloudcomputing-eaglegogogo.c9users.io/au/mel");
+              });   
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGZ10PwxxqzWXjUVgZrbUMA_f1PmNWFiw&callback=initMap">
+    </script>
+  </body>
+</html>
