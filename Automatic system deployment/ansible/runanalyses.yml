@@ -1,0 +1,21 @@
+---
+- hosts: cloudservers
+  remote_user: ubuntu
+  tasks:
+  - name: copy python file to cloud node
+    copy: src=./sentiment_code/ dest=/home/ubuntu/
+    sudo: yes
+  - name: copy python file to cloud node
+    copy: src=./hottopic/ dest=/home/ubuntu/
+    sudo: yes
+
+  - name: run sentiment_analysis appliction
+    shell: nohub python sentiment_analyser.py &
+
+  - name: run hot topic analysis
+    shell: nohub python  hotTopicAdelaide.py &
+    shell: nohub python  hotTopicAustralia.py &
+    shell: nohub python  hotTopicBrisbane.py &
+    shell: nohub python  hotTopicMelbourne.py &
+    shell: nohub python  hotTopicPerth.py &
+    shell: nohub python  hotTopicSydney.py &

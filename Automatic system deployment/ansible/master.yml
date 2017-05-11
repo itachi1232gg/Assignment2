@@ -1,0 +1,6 @@
+# file: master.yml
+- include: installcommonsoftware
+- include: runboto.yml
+- include: runcloudservers.yml
+- include: runanalysis
+- include: runwebservers.yml

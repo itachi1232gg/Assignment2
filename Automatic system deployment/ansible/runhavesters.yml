@@ -1,0 +1,16 @@
+---
+- hosts: cloudservers
+  remote_user: ubuntu
+  tasks:
+  - name: copy file to VMs
+    copy: src=../assignment2/harvester dest=/home/ubuntu owner=ubuntu group=ubuntu mode=0644
+
+  - name: run stream_harvester
+    remote_user: ubuntu
+    shell: nuhup python stream_harvester.py &
+
+  - name: run search_tweets_harvester
+    shell: nuhup python search_tweets_harvester.py &
+   
+  - name: runharvester_timeline
+    shell: nuhup python user_timeline_harvester.py &

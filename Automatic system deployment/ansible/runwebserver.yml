@@ -1,0 +1,9 @@
+---
+- hosts: cloudservers
+  remote_user: ubuntu
+  tasks:
+  - name: copy node.js files to cloud node
+    copy: src=./webserver/twitterResult/index.js dest=/home/ubuntu/
+    sudo: yes
+  - name: run webserver appliction
+    raw: sudo nohup nodejs /home/ubuntu//webserver/twitterResult/index.js &

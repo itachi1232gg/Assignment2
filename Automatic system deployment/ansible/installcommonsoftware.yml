@@ -1,0 +1,21 @@
+---
+# tasks file for install commonsoftware
+- name: Install apache2
+  apt: pkg=apache2 state=latest
+- name: Install curl
+  apt: pkg=curl state=latest
+- name: Install pip
+  easy_install: name=pip state=latest
+- name: Install python-couchDB
+  apt: pkg=python-couchdb state=latest
+- name: Install essential python package through pip
+  pip: name={{item}} state=latest
+  with_items:
+    - twython 
+    - nltk
+    - textblob
+    - googlemaps
+    - jsonpickle
+- name: Downloads nltk corpora and language models used in TextBlob
+  command: python -m textblob.download_corpora---
+# handlers file for installsoftware

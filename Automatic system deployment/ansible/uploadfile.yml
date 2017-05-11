@@ -1,0 +1,4 @@
+---
+# tasks file for uploadfile
+- name: copy file to VMs
+  copy: src=../files/harvesters dest=/home/ubuntu owner=ubuntu group=ubuntu mode=0644

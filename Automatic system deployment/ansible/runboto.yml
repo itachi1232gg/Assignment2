@@ -1,0 +1,5 @@
+---
+# file: runboto.yml
+- name: runboto to set up the instance and attach volumes automatically
+  hosts: localhost
+  shell: python /Users/cancui/Downloads/cloud-assignment/Assignment2/Automatic\ system\ deployment/ansible/runboto.yml 

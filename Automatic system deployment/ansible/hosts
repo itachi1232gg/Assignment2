@@ -1,0 +1,19 @@
+[localhost]
+localhost ansible_connection=local
+
+[cloudservers]
+115.146.89.67
+115.146.89.7
+115.146.89.154
+115.146.89.69
+
+[webservers]
+115.146.89.69
+
+[allclouds:children]
+cloudservers
+webservers
+
+[allclouds:vars]
+ansible_user=ubuntu
+ansible_private_key_file=/Users/sunshine/Desktop/cloudtweet.pem
