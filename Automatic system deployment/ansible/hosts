@@ -16,4 +16,4 @@ webservers
 
 [allclouds:vars]
 ansible_user=ubuntu
-ansible_private_key_file=/Users/sunshine/Desktop/cloudtweet.pem
+ansible_private_key_file=/Users/cancui/Desktop/cloud.key
